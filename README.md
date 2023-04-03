@@ -23,16 +23,19 @@ Les interfaces sont annotées avec @Local et les implementations de ces interfac
 -logoutServlet: récupère la session, la détruit et renvoie dans la page de connexion
 -StudentServlet: gère la l'ajout, suppression, modification des infos et l'affichage (de tous les etudiants ou un etudiant) d'etudiant.
 il utilise l'interface Istudent dans ejb comme tel:
-     @EJB
+
+        @EJB
 	private IStudent istudent ;
     
     recuperation d'un seul etudiant :
-                 Student student = istudent.get(id,students);
+    
+                         Student student = istudent.get(id,students);
 	        	 request.setAttribute("student", student);
                  
    recuperation de tous les etudiants en utilisant la pagination :
+   
         String paged = request.getParameter("page");
-		int pageid=1;
+	int pageid=1;
         int total = 5;
         Student students = new Student();
         int limit = istudent.list(students).size();
@@ -55,18 +58,15 @@ il utilise l'interface Istudent dans ejb comme tel:
 		
 		}
    
-                 Student student = new Student();
-               
+                Student student = new Student();
                 List<Student> listStudent = istudent.liste(student,pageid,total);
-              
                 request.setAttribute("listStudent", listStudent);
                 request.setAttribute("page", page);
                 request.setAttribute("pages", pages);
                 this.getServletContext().getRequestDispatcher("/Student/list.jsp").forward(request, response);
                 
  -Suppression:
-                int id =Integer.parseInt(idDel);
-	        	
+                         int id =Integer.parseInt(idDel);
 	        	int result = istudent.delete(id,students);
  -Modification des infos:
         String date = request.getParameter("date");
@@ -405,7 +405,7 @@ Exemple d'un formulaire:
                    
                   </form>
                   
-               Merci d'avoir prie le temps de regarder tout se bla bla!!!
+               Merci d'avoir prie le temps de regarder tout ce bla bla!!!
    
    
     
